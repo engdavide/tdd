@@ -22,7 +22,7 @@ class NewVisitorTest(unittest.TestCase):
 		inputbox = self.browser.find_element_by_id('id_new_item')
 		self.assertEqual(
 			inputbox.get_attribute('placeholder'),
-			'enter a to-do item'
+			'Enter a to-do item'
 		)
 		# she types "buy stuff" into a text box
 		inputbox.send_keys('buy stuff')
@@ -32,9 +32,7 @@ class NewVisitorTest(unittest.TestCase):
 
 		table = self.browser.find_element_by_id('id_list_table')
 		rows = table.find_elements_by_tag_name('tr')
-		self.assertTrue(
-			any(row.text == '1 buy stuff' for row in rows)
-		)
+		self.assertIn('1. buy stuff', [row.text for row in rows])
 
 		# there is still a textbox to add a item. she adds "do stuff" and hits enter
 		self.fail('finish the test!') 
